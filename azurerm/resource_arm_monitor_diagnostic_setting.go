@@ -370,6 +370,10 @@ func flattenMonitorDiagnosticLogs(input *[]insights.LogSettings) []interface{} {
 	for _, v := range *input {
 		output := make(map[string]interface{})
 
+		if v.Enabled != nil && !*v.Enabled {
+			continue
+		}
+
 		if v.Category != nil {
 			output["category"] = *v.Category
 		}
@@ -440,6 +444,10 @@ func flattenMonitorDiagnosticMetrics(input *[]insights.MetricSettings) []interfa
 
 	for _, v := range *input {
 		output := make(map[string]interface{})
+
+		if v.Enabled != nil && !*v.Enabled {
+			continue
+		}
 
 		if v.Category != nil {
 			output["category"] = *v.Category
